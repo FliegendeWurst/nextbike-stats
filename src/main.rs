@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use rusqlite::{params, Connection};
@@ -39,7 +41,7 @@ struct Place {
 async fn main() {
 	let mut db = Connection::open("nextbike.db").unwrap();
 	db.execute(
-		"CREATE TABLE IF NOT EXISTS bikes(uid INTEGER PRIMARY KEY NOT NULL) STRICT",
+		"CREATE TABLE IF NOT EXISTS bikes(uid INTEGER PRIMARY KEY NOT NULL)",
 		params![],
 	)
 	.unwrap();
@@ -50,7 +52,7 @@ async fn main() {
         lat REAL NOT NULL,
         lng REAL NOT NULL,
         PRIMARY KEY(uid, time)
-    ) STRICT",
+    )",
 		params![],
 	)
 	.unwrap();
